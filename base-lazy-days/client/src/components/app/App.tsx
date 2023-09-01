@@ -1,5 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { ReactElement } from 'react';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+// eslint-disable-next-line import/no-unresolved
+import { queryClient } from 'react-query/queryClient';
 
 import { theme } from '../../theme';
 import { Loading } from './Loading';
@@ -9,9 +13,12 @@ import { Routes } from './Routes';
 export function App(): ReactElement {
   return (
     <ChakraProvider theme={theme}>
-      <Navbar />
-      <Loading />
-      <Routes />
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        <Loading />
+        <Routes />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </ChakraProvider>
   );
 }
