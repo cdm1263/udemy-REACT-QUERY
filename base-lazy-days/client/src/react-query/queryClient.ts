@@ -17,12 +17,15 @@ function queryErrorHandler(error: unknown): void {
 
 // to satisfy typescript until this file has uncommented contents
 export const queryClient = new QueryClient({
-  // defaultOptions를 사용하지 않는 이유는 42번 강의문서 참고
-  // defaultOptions: {
-  //   queries: {
-  //     onError: queryErrorHandler,
-  //   },
-  // },
+  defaultOptions: {
+    queries: {
+      staleTime: 600000,
+      cacheTime: 900000,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    },
+  },
   queryCache: new QueryCache({
     onError: queryErrorHandler,
   }),
